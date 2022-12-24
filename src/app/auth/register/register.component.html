@@ -1,0 +1,164 @@
+<div class="container w-25 mx-auto my-5">
+  <form [formGroup]="registerForm" (ngSubmit)="handleSubmitForm()" class="mb-5">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        aria-describedby="nameHelp"
+        formControlName="name"
+      />
+      <div *ngIf="formControls['name'].touched && !formControls['name'].valid">
+        <div
+          *ngIf="
+            formControls['name'].errors &&
+            formControls['name'].errors['required']
+          "
+          class="form-text text-danger"
+        >
+          This field is required
+        </div>
+        <div
+          *ngIf="
+            formControls['name'].errors &&
+            formControls['name'].errors['minlength']
+          "
+          class="form-text text-danger"
+        >
+          Min. length is 10 characters
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="text"
+        class="form-control"
+        id="email"
+        formControlName="email"
+      />
+      <div
+        *ngIf="formControls['email'].touched && !formControls['email'].valid"
+      >
+        <div
+          *ngIf="
+            formControls['email'].errors &&
+            formControls['email'].errors['required']
+          "
+          class="text-danger"
+        >
+          This field is required
+        </div>
+        <div
+          *ngIf="
+            formControls['email'].errors &&
+            formControls['email'].errors['maxlength']
+          "
+          class="text-danger"
+        >
+          Max length is 10
+        </div>
+        <div
+          *ngIf="
+            formControls['email'].errors &&
+            formControls['email'].errors['pattern']
+          "
+          class="text-danger"
+        >
+          Wrong mail format
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="username" class="form-label">User Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        formControlName="username"
+      />
+      <div
+        *ngIf="
+          formControls['username'].touched && !formControls['username'].valid
+        "
+      >
+        <div
+          *ngIf="
+            formControls['username'].errors &&
+            formControls['username'].errors['required']
+          "
+          class="text-danger"
+        >
+          This field is required
+        </div>
+        <div
+          *ngIf="
+            formControls['username'].errors &&
+            formControls['username'].errors['maxlength']
+          "
+          class="text-danger"
+        >
+          Max length is 10
+        </div>
+        <div
+          *ngIf="
+            formControls['username'].errors &&
+            formControls['username'].errors['pattern']
+          "
+          class="text-danger"
+        >
+          No Spaces
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        type="text"
+        class="form-control"
+        id="password"
+        formControlName="password"
+      />
+      <div
+        *ngIf="
+          formControls['password'].touched && !formControls['password'].valid
+        "
+      >
+        <div
+          *ngIf="
+            formControls['password'].errors &&
+            formControls['password'].errors['required']
+          "
+          class="text-danger"
+        >
+          This field is required
+        </div>
+
+        <div
+          *ngIf="
+            formControls['password'].errors &&
+            formControls['password'].errors['pattern']
+          "
+          class="text-danger"
+        >
+          password length not less than 8 characters , contains at least one
+          lowercase , one uppercase , at least one digit and special character [
+          example : *@%$# ] ]
+        </div>
+      </div>
+    </div>
+    <button
+      type="submit"
+      [disabled]="registerForm.invalid"
+      class="btn btn-primary w-100"
+    >
+      Submit
+    </button>
+  </form>
+
+  <p class="fw-bold">
+    Already have account?
+    <a routerLink="/login" class="text-black">Login</a>
+  </p>
+</div>

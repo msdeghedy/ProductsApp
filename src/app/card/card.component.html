@@ -1,0 +1,55 @@
+<div class="card h-100">
+  <img
+    [src]="product.image"
+    class="card-img-top h-50 w-50 mx-auto"
+    [alt]="product.name"
+  />
+  <div class="card-body pb-0">
+    <h5 class="card-title">{{ product.name | uppercase }}</h5>
+    <p class="card-text">
+      {{ product.description }}
+    </p>
+    <p *ngIf="product.count; then inStock; else outStock"></p>
+    <ng-template #inStock>
+      <p class="text-success">In Stock</p>
+    </ng-template>
+    <ng-template #outStock>
+      <p class="text-danger">Out of Stock</p>
+    </ng-template>
+    <p class="fw-bold">{{ product.price | currency: "USD" }}</p>
+    <p class="fw-bold">Rate: {{ product.rate }}</p>
+
+    <a class="btn btn-secondary me-2 mb-3" (click)="handleClickOnDetails()">
+      Details
+    </a>
+
+    <p *ngIf="added; then disable; else enable"></p>
+
+    <ng-template #disable>
+      <p class="mb-3">Added To Cart ✔</p>
+    </ng-template>
+
+    <ng-template #enable>
+      <button
+        class="btn btn-primary mb-3"
+        (click)="handleClickOnCartButton()"
+        *ngIf="product.count"
+      >
+        Add To Cart
+      </button>
+    </ng-template>
+
+    <button
+      class="btn mb-3 ms-2"
+      (click)="handleClickOnFavouritesBtn()"
+      [ngClass]="addedToFavourites ? 'btn-success' : 'btn-warning'"
+    >
+      <i class="fa-solid fa-star"></i>
+    </button>
+  </div>
+  <div class="card-footer">
+    <small class="text-muted">{{
+      product.createdAt | date: "MMMM d, y"
+    }}</small>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="container mt-5">
+  <p *ngIf="!counter" class="h1 fw-bold text-danger text-center">Empty Cart!</p>
+  <table class="border border1 w-100 w-75 mx-auto" *ngIf="counter">
+    <tr>
+      <th class="border border1">Product image</th>
+      <th class="border border1">Product name</th>
+      <th class="border border1">Product price</th>
+      <th class="border border1">Quantity</th>
+    </tr>
+    <tr *ngFor="let record of arrOfProducts; index as i" class="border border1">
+      <td class="border border1 w-25">
+        <img [src]="arrOfProducts[i].image" class="w-25" />
+      </td>
+
+      <td class="border border1">
+        {{ arrOfProducts[i].name }}
+      </td>
+      <td class="border border1">
+        {{ +arrOfProducts[i].price * qunatityArr[i] | currency: "USD" }}
+      </td>
+      <td class="border border1" [id]="i">
+        <button class="btn btn-danger me-2" (click)="decreaseQuantity($event)">
+          -
+        </button>
+        <span class="text-success"> {{ qunatityArr[i] | counter }} </span>
+        <button class="btn btn-success ms-2" (click)="increaseQuantity($event)">
+          +
+        </button>
+      </td>
+
+      <td class="border border-1" [id]="i">
+        <button class="btn btn-danger" (click)="handleRemoveItem($event)">
+          Remove
+        </button>
+      </td>
+    </tr>
+  </table>
+
+  <p class="text-end p-4 text-secondary bg-light fw-bold" *ngIf="counter">
+    Total Price: {{ total | currency: "USD" }}
+  </p>
+</div>

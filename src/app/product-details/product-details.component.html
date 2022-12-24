@@ -1,0 +1,24 @@
+<div
+  class="spinner vh-100 d-flex align-items-center justify-content-center"
+  *ngIf="!requestDone"
+>
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<div class="container text-center" *ngIf="requestDone">
+  <h1>{{ productDetails.name }}</h1>
+  <img
+    [src]="productDetails.image"
+    class="card-img-top w-25 h-25"
+    [alt]="productDetails.name"
+  />
+  <p>
+    {{ productDetails.description }}
+  </p>
+
+  <p class="fw-bold">{{ productDetails.price | currency: "USD" }}</p>
+  <p class="fw-bold">Rate: {{ productDetails.rate }}</p>
+  <p class="fw-bold">{{ productDetails.createdAt | date: "MMMM d, y" }}</p>
+</div>
